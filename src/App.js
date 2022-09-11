@@ -4,6 +4,7 @@ import Home from "./Pages/Home/Home";
 import Navbar from "./Pages/Shared/Navbar";
 import Footer from "./Pages/Shared/Footer";
 import Registartion from "./Pages/Home/Registartion";
+import BusInventory from "./Pages/BusInventory/BusInventory";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Registartion />} />
+        <Route path="/businventory" element={<BusInventory />} />
       </Routes>
       <Footer></Footer>
     </div>

@@ -6,7 +6,7 @@ const Navbar = () => {
         <>
             <li>
                 <Link to='/'>Dashboard</Link>
-                <Link to='/'>Bus</Link>
+                <Link to='/businventory'>Bus</Link>
                 <Link to='/'>Routine</Link>
                 <button className="menu menu-horizontal">Sign Out</button>
             </li>
