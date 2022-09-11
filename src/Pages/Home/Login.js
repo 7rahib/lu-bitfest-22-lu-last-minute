@@ -70,7 +70,7 @@ const Login = () => {
                         <div
                           class="text-xs font-medium"
                         >
-                          {userData?.student.batch}
+                          {userData?.student?.batch}
                         </div>
                       </li>
 
@@ -78,7 +78,7 @@ const Login = () => {
                         <div
                           class="text-xs font-medium"
                         >
-                          {userData?.student.section}
+                          {userData?.student?.section}
                         </div>
                       </li>
 
@@ -98,7 +98,7 @@ const Login = () => {
                   <div
                     class="block h-full p-4 border rounded-lg"
                   >
-                    <h5 class="font-medium ">Stoppage: {userData?.regularRoute.stoppage}</h5>
+                    <h5 class="font-medium ">Stoppage: {userData?.regularRoute?.stoppage}</h5>
                   </div>
                 </li>
 
@@ -118,7 +118,7 @@ const Login = () => {
             </article>
           </div>
           :
-          <div><div class="w-full px-4 py-12 lg:w-1/2 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
+          <div class="w-full px-4 py-12 lg:w-1/2 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
             <div class="max-w-lg mx-auto text-center">
               <h1 class="text-2xl font-bold sm:text-3xl">Login</h1>
             </div>
@@ -195,7 +195,8 @@ const Login = () => {
                 </p>
               </div>
             </form>
-          </div></div>
+          </div>
+
         }
       </section>
     </div>
