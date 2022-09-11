@@ -10,6 +10,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import RouteList from "./Pages/Dashboard/RouteList";
 import AddBusInventory from "./Pages/Dashboard/AddBusInventory";
 import UpdateProfile from "./Pages/Home/UpdateProfile";
+import StaffList from "./Pages/Dashboard/StaffList";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               element={<AddBusInventory></AddBusInventory>}
             ></Route>
             <Route path="route" element={<RouteList></RouteList>}></Route>
+            <Route path="stafflist" element={<StaffList></StaffList>}></Route>
           </Route>
         </Routes>
         <Footer></Footer>

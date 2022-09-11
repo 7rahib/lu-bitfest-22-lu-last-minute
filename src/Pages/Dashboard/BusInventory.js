@@ -31,7 +31,7 @@ const BusInventory = () => {
         //     </div>
         // </div>
 
-        <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-64 mb-5 gap-2'>
+        <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
             {
                 busLists.map((busList) => <BusInventoryCard
                     key={busLists._id}
