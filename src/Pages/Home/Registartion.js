@@ -2,12 +2,28 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import UseAuth from "../../Context/UseAuth";
+import { useQuery } from 'react-query';
+import { async } from "@firebase/util";
 
 const Registartion = () => {
   const navigate = useNavigate();
   const { emailPassSignIn } = UseAuth();
   const [role, setRole] = useState("");
   const [route, setRoute] = useState();
+  const [stopages, setStopages] = useState([]);
+
+  const { data: routes, isLoading, refetch } = useQuery('routes', () => fetch("http://localhost:5000/route",).then(res => {
+    refetch()
+    const data = res.json();
+    return data;
+  }))
+  const fetchStoppage = (routeNumber) => {
+    fetch(`http://localhost:5000/route/stoppage/${routeNumber}`).then((res) => res.json()).then((data) => {
+
+      setStopages(data);
+
+    });
+  }
 
   const {
     register,
@@ -201,78 +217,35 @@ const Registartion = () => {
                 {...register("route")}
                 name="route"
                 className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
-                onChange={(e) => setRoute(e.target.value)}
+                onChange={async (e) => {
+                  const rn = parseInt(e.target.value);
+                  fetchStoppage(rn)
+                  setRoute(e.target.value);
+                }}
               >
                 <option value="">Select your route</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+                {
+                  routes?.data?.map((route, index) => {
+                    return <option>{route?.routeNumber}</option>
+                  })
+                }
               </select>
             </div>
-            {route === "1" ? (
-              <div>
-                {" "}
-                <select
-                  {...register("pickup")}
-                  name="pickup"
-                  className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
-                >
-                  <option value="">Select Stopage</option>
-                  <option>Tillagor</option>
-                  <option>Route 2</option>
-                  <option>Route 3</option>
-                  <option>Route 4</option>
-                </select>
-              </div>
-            ) : route === "2" ? (
-              <div>
-                {" "}
-                <select
-                  {...register("pickup")}
-                  name="pickup"
-                  className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
-                >
-                  <option value="">Select Stopage</option>
-                  <option>Bondor</option>
-                  <option>Route 2</option>
-                  <option>Route 3</option>
-                  <option>Route 4</option>
-                </select>
-              </div>
-            ) : route === "3" ? (
-              <div>
-                {" "}
-                <select
-                  {...register("pickup")}
-                  name="pickup"
-                  className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
-                >
-                  <option value="">Select Stopage</option>
-                  <option>Am</option>
-                  <option>Route 2</option>
-                  <option>Route 3</option>
-                  <option>Route 4</option>
-                </select>
-              </div>
-            ) : route === "4" ? (
-              <div>
-                {" "}
-                <select
-                  {...register("pickup")}
-                  name="pickup"
-                  className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
-                >
-                  <option value="">Select Stopage</option>
-                  <option>Shibgonj</option>
-                  <option>Route 2</option>
-                  <option>Route 3</option>
-                  <option>Route 4</option>
-                </select>
-              </div>
-            ) : (
-              ""
-            )}
+            <div>
+              {" "}
+              <select
+                {...register("pickup")}
+                name="pickup"
+                className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
+              >
+                <option value="">Select Stopage</option>
+                {
+                  stopages?.map((stoppage) => {
+                    return <option>{stoppage?.label}</option>
+                  })
+                }
+              </select>
+            </div>
 
             <div className="mb-2">
               <select
