@@ -4,7 +4,6 @@ import UseAuth from "../../Context/UseAuth";
 
 const Navbar = () => {
   const { user, Logout } = UseAuth();
-  console.log(user);
   const menuItems = (
     <>
       <li>
