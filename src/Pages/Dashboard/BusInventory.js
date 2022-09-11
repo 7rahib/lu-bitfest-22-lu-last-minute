@@ -30,30 +30,16 @@ const BusInventory = () => {
         //         </div>
         //     </div>
         // </div>
-        <div>
-            <div className="drawer drawer-mobile">
-                <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col items-center justify-center">
-                    <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
-                    <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-96 mb-16'>
-                        {
-                            busLists.map((busList) => <BusInventoryCard
-                                key={busLists._id}
-                                product={busList}
-                            ></BusInventoryCard>)
-                        }
-                    </div>
 
-                </div>
-                <div className="drawer-side">
-                    <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
-                        <AddBusInventory></AddBusInventory>
-                    </ul>
-
-                </div>
-            </div>
+        <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-64 mb-5 gap-2'>
+            {
+                busLists.map((busList) => <BusInventoryCard
+                    key={busLists._id}
+                    product={busList}
+                ></BusInventoryCard>)
+            }
         </div>
+
     );
 };
 

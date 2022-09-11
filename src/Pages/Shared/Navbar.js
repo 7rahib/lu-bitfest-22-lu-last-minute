@@ -9,7 +9,7 @@ const Navbar = () => {
       <li>
         {user.email ? (
           <>
-            <Link to="/">Dashboard</Link>
+            <Link to="/dashboard">Dashboard</Link>
             <Link to="/businventory">Bus</Link>
             <button className="menu menu-horizontal" onClick={Logout}>
               Sign Out
@@ -51,16 +51,11 @@ const Navbar = () => {
             </ul>
           </div>
           <Link to="/" className="btn btn-ghost normal-case text-xl">
-            daisyUI
+            LU Transport
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">{menuItems}</ul>
-        </div>
-        <div className="navbar-end">
-          <Link to="/" className="btn">
-            Get started
-          </Link>
         </div>
       </div>
     </div>
