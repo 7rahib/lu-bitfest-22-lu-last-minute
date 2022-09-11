@@ -34,8 +34,8 @@ const Registartion = () => {
     );
   };
   return (
-    <div className="mb-5">
-      <section class="relative flex lg:h-screen lg:items-center">
+    <div className="">
+      <section class="relative flex flex-row lg:items-center justify-center">
         <div class="w-full px-4 py-12 lg:w-1/2 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
           <div class="max-w-lg mx-auto text-center">
             <div class="max-w-lg mx-auto text-center">
@@ -532,13 +532,13 @@ const Registartion = () => {
             </div>
           </form>
         </div>
-        <div class="relative w-full h-full sm:h-96 lg:w-1/2 lg:h-full">
+        {/* <div class="relative w-full h-full sm:h-96 lg:w-1/2 lg:h-full">
           <img
             class="absolute inset-0 object-cover w-full h-full"
             src={loginForm}
             alt=""
           />
-        </div>
+        </div> */}
       </section>
     </div>
   );
