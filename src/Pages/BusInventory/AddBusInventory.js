@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const AddBusInventory = () => {
+    const [isActive, setIsActive] = useState();
+
     const {
         register,
         formState: { errors },
@@ -9,8 +11,42 @@ const AddBusInventory = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data.email, data.password)
-    }
+        let isActiveBool;
+        if (isActive === 'Yes') {
+            isActiveBool = 1;
+        }
+        else {
+            isActiveBool = 0;
+        }
+        const newBus = {
+            codename: data.codename,
+            licenseNum: data.licence,
+            capacity: data.capacity,
+            driver: {
+                Name: data.driverName,
+                contact: data.driverContact
+            },
+            isActive: isActiveBool
+        }
+        fetch("http://localhost:5000/bus", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({ ...newBus }),
+        })
+            .then((res) => res.json())
+            .then((fetchedData) => {
+                if (fetchedData._id) {
+                    console.log(fetchedData);
+                    alert("collected");
+                } else {
+                    alert("not collected");
+                }
+            });
+    };
+
+
     return (
         <div className='flex flex-col justify-center'>
             <div>
@@ -63,7 +99,7 @@ const AddBusInventory = () => {
                         </div>
                         <div>
                             <input
-                                type="text"
+                                type="number"
                                 placeholder="Seat Capacity"
                                 name="capacity"
                                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
@@ -81,6 +117,18 @@ const AddBusInventory = () => {
                                     </span>
                                 )}
                             </label>
+                        </div>
+                        <div>
+                            <select
+                                value={isActive}
+                                onChange={(e) => setIsActive(e.target.value)}
+                                name="isActive"
+                                className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
+                            >
+                                <option disabled selected>Is the bus available</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
                         </div>
                         <div>
                             <input
@@ -105,7 +153,7 @@ const AddBusInventory = () => {
                         </div>
                         <div>
                             <input
-                                type="text"
+                                type="number"
                                 placeholder="Driver Contact Number"
                                 name="driverContact"
                                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
@@ -124,27 +172,6 @@ const AddBusInventory = () => {
                                 )}
                             </label>
                         </div>
-                        <div>
-                            <input
-                                type="email"
-                                placeholder="Your email address"
-                                name="email"
-                                class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                                {...register("email", {
-                                    required: {
-                                        value: true,
-                                        message: "Email is Required",
-                                    }
-                                })}
-                            />
-                            <label className="label">
-                                {errors.email?.type === "required" && (
-                                    <span className="label-text-alt text-red-500">
-                                        {errors.email.message}
-                                    </span>
-                                )}
-                            </label>
-                        </div>
                         <button
                             type="submit"
                             class="inline-block px-5 py-3 ml-3 text-sm font-medium text-white bg-blue-500 rounded-lg"
@@ -153,8 +180,8 @@ const AddBusInventory = () => {
                         </button>
                     </form>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

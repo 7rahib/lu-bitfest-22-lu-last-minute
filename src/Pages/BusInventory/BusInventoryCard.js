@@ -1,15 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import bus1 from '../../Assets/Images/bus/bus1.jpg'
 
-const BusInventoryCard = () => {
+const BusInventoryCard = (product) => {
+    let isActiveBool;
+    if (product?.product?.isActive === 1) {
+        isActiveBool = 'Yes'
+    }
+    else {
+        isActiveBool = 'No'
+    }
     return (
-        <Link
-            to=""
+        <div
             class="block p-4 rounded-lg shadow-sm shadow-indigo-100"
         >
             <img
                 alt="123 Wallaby Avenue, Park Road"
-                src="https://images.unsplash.com/photo-1554995207-c18c203602cb"
+                src={bus1}
                 class="object-cover w-full h-56 rounded-md"
             />
 
@@ -17,34 +23,35 @@ const BusInventoryCard = () => {
                 <dl>
                     <div>
                         <dt class="sr-only">
-                            Price
+                            Name
                         </dt>
 
-                        <dd class="text-sm text-gray-500">
-                            $240,000
+                        <dd class="font-medium ml-3">
+                            {product?.product?.driver.Name}
                         </dd>
                     </div>
-
-                    <div>
-                        <dt class="sr-only">
-                            Address
+                </dl>
+                <dl>
+                    <div class="sm:ml-3 mt-1.5 sm:mt-0">
+                        <dt class="text-gray-500">
+                            Contact Number
                         </dt>
 
                         <dd class="font-medium">
-                            123 Wallaby Avenue, Park Road
+                            {product?.product?.driver?.contact}
                         </dd>
                     </div>
                 </dl>
 
-                <dl class="flex items-center mt-6 text-xs space-x-8">
+                <dl class="flex items-center mt-6 text-xs">
                     <div class="sm:inline-flex sm:items-center sm:shrink-0">
                         <div class="sm:ml-3 mt-1.5 sm:mt-0">
                             <dt class="text-gray-500">
-                                Parking
+                                License Number
                             </dt>
 
                             <dd class="font-medium">
-                                2 spaces
+                                {product?.product?.licenseNum}
                             </dd>
                         </div>
                     </div>
@@ -52,11 +59,11 @@ const BusInventoryCard = () => {
                     <div class="sm:inline-flex sm:items-center sm:shrink-0">
                         <div class="sm:ml-3 mt-1.5 sm:mt-0">
                             <dt class="text-gray-500">
-                                Bathroom
+                                Codename
                             </dt>
 
                             <dd class="font-medium">
-                                2 rooms
+                                {product?.product?.codename}
                             </dd>
                         </div>
                     </div>
@@ -64,17 +71,29 @@ const BusInventoryCard = () => {
                     <div class="sm:inline-flex sm:items-center sm:shrink-0">
                         <div class="sm:ml-3 mt-1.5 sm:mt-0">
                             <dt class="text-gray-500">
-                                Bedroom
+                                Capacity
                             </dt>
 
                             <dd class="font-medium">
-                                4 rooms
+                                {product?.product?.capacity}
+                            </dd>
+                        </div>
+                    </div>
+                    <div class="sm:inline-flex sm:items-center sm:shrink-0">
+                        <div class="sm:ml-3 mt-1.5 sm:mt-0">
+                            <dt class="text-gray-500">
+                                Available
+                            </dt>
+
+                            <dd class="font-medium">
+                                {isActiveBool}
                             </dd>
                         </div>
                     </div>
                 </dl>
             </div>
-        </Link>
+        </div>
+
 
     );
 };
