@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginForm from "../../Assets/Images/Home/LoginForm.jpg";
+import UseAuth from "../../Context/UseAuth";
 
 const Registartion = () => {
+  const navigate = useNavigate();
+  const { emailPassSignIn } = UseAuth();
   const [role, setRole] = useState("");
   const [route, setRoute] = useState("");
+
   const {
     register,
     formState: { errors },
@@ -13,25 +17,59 @@ const Registartion = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(
-      data.email,
-      data.fullname,
-      data.username,
-      data.number,
-      data.pickup,
-      data.route,
-      data.id,
-      data.batch,
-      data.section,
-      data.batch,
-      data.dept,
-      data.codename,
-      data.designation,
-      data.password,
-      data.confirmPassword,
-      data.staffId,
-      role
-    );
+    // emailPassSignIn(data.email, data.password);
+    if (role === "student") {
+      data.dept = "0";
+      data.codename = "0";
+      data.designation = "0";
+    }
+    if (role === "faculty") {
+      data.batch = 0;
+      data.section = "0";
+    }
+
+    const newUser = {
+      displayName: data.fullname,
+      username: data.username,
+      email: data.email,
+      contactNumber: data.number,
+      role: role,
+      oid: parseInt(data.id),
+      regularRoute: {
+        routeNumber: parseInt(route),
+        stoppage: data.pickup,
+      },
+
+      student: {
+        batch: parseInt(data.batch),
+        section: data.section,
+      },
+      teacher: {
+        department: data.dept,
+        codeName: data.codename,
+        designation: data.designation,
+      },
+    };
+
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ ...newUser }),
+    })
+      .then((res) => res.json())
+      .then((fetchedData) => {
+        console.log(fetchedData);
+        if (fetchedData._id) {
+          console.log(fetchedData);
+          alert("collected");
+          emailPassSignIn(fetchedData.email, data.password);
+          navigate("/");
+        } else {
+          alert("not collected");
+        }
+      });
   };
   return (
     <div className="">
@@ -50,7 +88,7 @@ const Registartion = () => {
           >
             <div class="relative">
               <input
-                type="fullname"
+                type="text"
                 placeholder="Full Name"
                 name="fullname"
                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
@@ -71,7 +109,7 @@ const Registartion = () => {
             </div>
             <div class="relative">
               <input
-                type="username"
+                type="text"
                 placeholder="User Name"
                 name="username"
                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
@@ -138,7 +176,7 @@ const Registartion = () => {
             </div>
             <div class="relative">
               <input
-                type="text"
+                type="number"
                 placeholder="Number as (01xxxxxxxxx) "
                 name="number"
                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
@@ -198,7 +236,7 @@ const Registartion = () => {
                 {" "}
                 <select
                   {...register("pickup")}
-                  name="route"
+                  name="pickup"
                   className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
                 >
                   <option value="">Select Stopage</option>
@@ -213,7 +251,7 @@ const Registartion = () => {
                 {" "}
                 <select
                   {...register("pickup")}
-                  name="route"
+                  name="pickup"
                   className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
                 >
                   <option value="">Select Stopage</option>
@@ -228,7 +266,7 @@ const Registartion = () => {
                 {" "}
                 <select
                   {...register("pickup")}
-                  name="route"
+                  name="pickup"
                   className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
                 >
                   <option value="">Select Stopage</option>
@@ -243,7 +281,7 @@ const Registartion = () => {
                 {" "}
                 <select
                   {...register("pickup")}
-                  name="route"
+                  name="pickup"
                   className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
                 >
                   <option value="">Select Stopage</option>
@@ -261,7 +299,7 @@ const Registartion = () => {
               <select
                 name="occupation"
                 value={role}
-                onChange={(e) => setRole(e.target.value)}
+                onChange={(e) => setRole(e.target.value.toLowerCase())}
                 className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
               >
                 <option value="">Register as a</option>
@@ -270,11 +308,11 @@ const Registartion = () => {
                 <option>Staff</option>
               </select>
             </div>
-            {role === "Student" ? (
+            {role === "student" ? (
               <div>
                 <div class="relative">
                   <input
-                    type="id"
+                    type="text"
                     placeholder="Student ID"
                     name="id"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
@@ -295,7 +333,7 @@ const Registartion = () => {
                 </div>
                 <div class="relative">
                   <input
-                    type="batch"
+                    type="number"
                     placeholder="Batch Number"
                     name="batch"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
@@ -316,7 +354,7 @@ const Registartion = () => {
                 </div>
                 <div class="relative">
                   <input
-                    type="section"
+                    type="text"
                     placeholder="Section"
                     name="section"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
@@ -336,11 +374,11 @@ const Registartion = () => {
                   </label>
                 </div>
               </div>
-            ) : role === "Faculty" ? (
+            ) : role === "faculty" ? (
               <div>
                 <div class="relative">
                   <input
-                    type="id"
+                    type="text"
                     placeholder="Organisational ID"
                     name="id"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
@@ -361,7 +399,7 @@ const Registartion = () => {
                 </div>
                 <div class="relative">
                   <input
-                    type="dept"
+                    type="text"
                     placeholder="Department"
                     name="dept"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
@@ -382,7 +420,7 @@ const Registartion = () => {
                 </div>
                 <div class="relative">
                   <input
-                    type="codename"
+                    type="text"
                     placeholder="Codename"
                     name="codename"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
@@ -403,7 +441,7 @@ const Registartion = () => {
                 </div>
                 <div class="relative">
                   <input
-                    type="designation"
+                    type="text"
                     placeholder="Designation"
                     name="designation"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"

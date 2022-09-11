@@ -1,14 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import UseAuth from "../../Context/UseAuth";
 
 const Navbar = () => {
+  const { user, Logout } = UseAuth();
+  console.log(user);
   const menuItems = (
     <>
       <li>
-        <Link to="/">Dashboard</Link>
-        <Link to="/businventory">Bus</Link>
-        <Link to="/">Routine</Link>
-        <button className="menu menu-horizontal">Sign Out</button>
+        {user.email ? (
+          <>
+            <Link to="/">Dashboard</Link>
+            <Link to="/businventory">Bus</Link>
+            <button className="menu menu-horizontal" onClick={Logout}>
+              Sign Out
+            </button>
+          </>
+        ) : (
+          <Link to="/">Routine</Link>
+        )}
       </li>
     </>
   );
