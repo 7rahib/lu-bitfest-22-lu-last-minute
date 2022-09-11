@@ -16,8 +16,8 @@ const UpdateProfile = () => {
         setUserData(data);
       });
   }, []);
-  console.log(userData);
-  console.log(userData?.regularRoute?.routeNumber);
+  //   console.log(userData);
+  //   console.log(userData?.regularRoute?.routeNumber);
 
   const {
     register,

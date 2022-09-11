@@ -1,9 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UseAuth from "../../Context/UseAuth";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { user, Logout } = UseAuth();
+  const handleLogout = () => {
+    Logout(navigate);
+  };
   const menuItems = (
     <>
       <li>
@@ -11,7 +15,7 @@ const Navbar = () => {
           <>
             <Link to="/dashboard">Dashboard</Link>
 
-            <button className="menu menu-horizontal" onClick={Logout}>
+            <button className="menu menu-horizontal" onClick={handleLogout}>
               Sign Out
             </button>
           </>

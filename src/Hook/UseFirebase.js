@@ -45,13 +45,14 @@ const UseFirebase = () => {
   };
 
   //logout
-  const Logout = () => {
+  const Logout = (navigate) => {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
         console.log("signOut");
         setUser("");
         localStorage.removeItem("username");
+        navigate("/");
       })
       .catch((error) => {
         // An error happened.
