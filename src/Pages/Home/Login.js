@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginForm from "../../Assets/Images/Home/LoginForm.jpg";
 import UseAuth from "../../Context/UseAuth";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState([]);
   const { emailPassLogIn, user } = UseAuth();
   const {
@@ -14,32 +15,32 @@ const Login = () => {
   } = useForm();
   const [email, setEmail] = useState();
 
+  let localUser = localStorage.getItem("username");
+  //   console.log(localUser);
+
+  useEffect(() => {
+    // console.log("hi");
+    fetch(`http://localhost:5000/users/${localUser}/info`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserData(data);
+      });
+  }, []);
+
   const onSubmit = (data) => {
     fetch(`http://localhost:5000/users/${data.username}/info`)
       .then((res) => res.json())
       .then((data) => {
         setEmail(data.email);
-        setUserData(data)
+        setUserData(data);
       });
+    localStorage.setItem("username", data.username);
     emailPassLogIn(email, data.password);
   };
 
-  // useEffect(() => {
-
-  //   fetch(`http://localhost:5000/users/${user.username}/info`, {
-  //     method: 'GET',
-  //     headers: {
-  //       "content-type": "application/json",
-  //     }
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setUserData(data)
-  //     })
-  // }, [user.username])
-
-  console.log(userData);
-
+  const updateProfile = () => {
+    navigate("/updateProfile");
+  };
 
   return (
     <div>
@@ -52,7 +53,7 @@ const Login = () => {
           />
         </div>
 
-        {(user.email) ?
+        {user.email ? (
           <div className="flex justify-center">
             <article class="p-4 border rounded-xl w-96 sm:mt-10 lg:ml-36">
               <div class="flex items-center">
@@ -67,26 +68,19 @@ const Login = () => {
                   <div class="flow-root">
                     <ul class="flex flex-wrap -m-1">
                       <li class="p-1 leading-none">
-                        <div
-                          class="text-xs font-medium"
-                        >
+                        <div class="text-xs font-medium">
                           {userData?.student?.batch}
                         </div>
                       </li>
 
                       <li class="p-1 leading-none">
-                        <div
-                          class="text-xs font-medium"
-                        >
+                        <div class="text-xs font-medium">
                           {userData?.student?.section}
                         </div>
                       </li>
 
                       <li class="p-1 leading-none">
-                        <div
-                          class="text-xs font-medium "
-                        >{userData?.role}</div
-                        >
+                        <div class="text-xs font-medium ">{userData?.role}</div>
                       </li>
                     </ul>
                   </div>
@@ -95,21 +89,21 @@ const Login = () => {
 
               <ul class="mt-4 space-y-2">
                 <li>
-                  <div
-                    class="block h-full p-4 border rounded-lg"
-                  >
-                    <h5 class="font-medium ">Stoppage: {userData?.regularRoute?.stoppage}</h5>
+                  <div class="block h-full p-4 border rounded-lg">
+                    <h5 class="font-medium ">
+                      Stoppage: {userData?.regularRoute?.stoppage}
+                    </h5>
                   </div>
                 </li>
 
                 <li>
-                  <div
-                    class="block h-full p-4 border rounded-lg"
-                  >
-                    <h5 class="font-medium ">Phone Number: {userData?.contactNumber}</h5>
+                  <div class="block h-full p-4 border rounded-lg">
+                    <h5 class="font-medium ">
+                      Phone Number: {userData?.contactNumber}
+                    </h5>
                     <h5 class="font-medium ">Email: {userData?.email}</h5>
 
-                    <button class="btn btn-sm mt-5">
+                    <button class="btn btn-sm mt-5" onClick={updateProfile}>
                       Update your profile
                     </button>
                   </div>
@@ -117,7 +111,7 @@ const Login = () => {
               </ul>
             </article>
           </div>
-          :
+        ) : (
           <div class="w-full px-4 py-12 lg:w-1/2 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
             <div class="max-w-lg mx-auto text-center">
               <h1 class="text-2xl font-bold sm:text-3xl">Login</h1>
@@ -196,11 +190,9 @@ const Login = () => {
               </div>
             </form>
           </div>
-
-        }
+        )}
       </section>
     </div>
-
   );
 };
 

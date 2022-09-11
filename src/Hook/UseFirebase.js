@@ -51,6 +51,7 @@ const UseFirebase = () => {
       .then(() => {
         console.log("signOut");
         setUser("");
+        localStorage.removeItem("username");
       })
       .catch((error) => {
         // An error happened.

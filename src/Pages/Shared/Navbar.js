@@ -10,7 +10,7 @@ const Navbar = () => {
         {user.email ? (
           <>
             <Link to="/dashboard">Dashboard</Link>
-            <Link to="/businventory">Bus</Link>
+
             <button className="menu menu-horizontal" onClick={Logout}>
               Sign Out
             </button>
