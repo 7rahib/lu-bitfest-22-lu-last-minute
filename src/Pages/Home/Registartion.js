@@ -5,7 +5,7 @@ import loginForm from "../../Assets/Images/Home/LoginForm.jpg";
 
 const Registartion = () => {
   const [role, setRole] = useState("");
-  // const [route, setRoute] = useState("");
+  const [route, setRoute] = useState("");
   const {
     register,
     formState: { errors },
@@ -157,7 +157,7 @@ const Registartion = () => {
                 )}
               </label>
             </div>
-            <div class="relative">
+            {/* <div class="relative">
               <input
                 type="pickup"
                 placeholder="Your Stopage"
@@ -177,12 +177,14 @@ const Registartion = () => {
                   </span>
                 )}
               </label>
-            </div>
+            </div> */}
             <div className="mb-2">
               <select
                 {...register("route")}
                 name="route"
                 className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
+                value={route}
+                onChange={(e) => setRoute(e.target.value)}
               >
                 <option value="">Select your route</option>
                 <option>Route 1</option>
@@ -191,6 +193,69 @@ const Registartion = () => {
                 <option>Route 4</option>
               </select>
             </div>
+            {route === "Route 1" ? (
+              <div>
+                {" "}
+                <select
+                  {...register("pickup")}
+                  name="route"
+                  className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
+                >
+                  <option value="">Select Stopage</option>
+                  <option>Tillagor</option>
+                  <option>Route 2</option>
+                  <option>Route 3</option>
+                  <option>Route 4</option>
+                </select>
+              </div>
+            ) : route === "Route 2" ? (
+              <div>
+                {" "}
+                <select
+                  {...register("pickup")}
+                  name="route"
+                  className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
+                >
+                  <option value="">Select Stopage</option>
+                  <option>Bondor</option>
+                  <option>Route 2</option>
+                  <option>Route 3</option>
+                  <option>Route 4</option>
+                </select>
+              </div>
+            ) : route === "Route 3" ? (
+              <div>
+                {" "}
+                <select
+                  {...register("pickup")}
+                  name="route"
+                  className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
+                >
+                  <option value="">Select Stopage</option>
+                  <option>Am</option>
+                  <option>Route 2</option>
+                  <option>Route 3</option>
+                  <option>Route 4</option>
+                </select>
+              </div>
+            ) : route === "Route 4" ? (
+              <div>
+                {" "}
+                <select
+                  {...register("pickup")}
+                  name="route"
+                  className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
+                >
+                  <option value="">Select Stopage</option>
+                  <option>Shibgonj</option>
+                  <option>Route 2</option>
+                  <option>Route 3</option>
+                  <option>Route 4</option>
+                </select>
+              </div>
+            ) : (
+              ""
+            )}
 
             <div className="mb-2">
               <select
