@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import loginForm from "../../Assets/Images/Home/LoginForm.jpg";
@@ -11,9 +11,15 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const [email, setEmail] = useState();
 
   const onSubmit = (data) => {
-    emailPassLogIn(data.email, data.password);
+    fetch(`http://localhost:5000/users/${data.username}/info`)
+      .then((res) => res.json())
+      .then((data) => {
+        setEmail(data.email);
+      });
+    emailPassLogIn(email, data.password);
   };
   return (
     <div>
@@ -36,18 +42,14 @@ const Login = () => {
           >
             <div class="relative">
               <input
-                type="email"
+                type="text"
                 placeholder="Your email address"
-                name="email"
+                name="username"
                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                {...register("email", {
+                {...register("username", {
                   required: {
                     value: true,
                     message: "Email is Required",
-                  },
-                  pattern: {
-                    value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-                    message: "Provide a valid Email",
                   },
                 })}
               />
@@ -57,28 +59,7 @@ const Login = () => {
                     {errors.email.message}
                   </span>
                 )}
-                {errors.email?.type === "pattern" && (
-                  <span className="label-text-alt text-red-500">
-                    {errors.email.message}
-                  </span>
-                )}
               </label>
-              <span class="absolute inset-y-0 inline-flex items-center right-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-5 h-5 text-gray-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                  />
-                </svg>
-              </span>
             </div>
             <div class="relative">
               <input
