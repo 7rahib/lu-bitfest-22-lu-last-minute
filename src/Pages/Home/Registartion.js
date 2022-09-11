@@ -5,7 +5,7 @@ import loginForm from "../../Assets/Images/Home/LoginForm.jpg";
 
 const Registartion = () => {
   const [role, setRole] = useState("");
-  const [route, setRoute] = useState("");
+  // const [route, setRoute] = useState("");
   const {
     register,
     formState: { errors },
@@ -18,7 +18,6 @@ const Registartion = () => {
       data.fullname,
       data.username,
       data.number,
-      data.occupation,
       data.pickup,
       data.route,
       data.id,
@@ -27,7 +26,11 @@ const Registartion = () => {
       data.batch,
       data.dept,
       data.codename,
-      data.designation
+      data.designation,
+      data.password,
+      data.confirmPassword,
+      data.staffId,
+      role
     );
   };
   return (
@@ -48,13 +51,13 @@ const Registartion = () => {
             <div class="relative">
               <input
                 type="fullname"
-                placeholder="Your fullname"
+                placeholder="Full Name"
                 name="fullname"
                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                 {...register("fullname", {
                   required: {
                     value: true,
-                    message: "fullname is Required",
+                    message: "Fullname is Required",
                   },
                 })}
               />
@@ -69,7 +72,7 @@ const Registartion = () => {
             <div class="relative">
               <input
                 type="username"
-                placeholder="Your username"
+                placeholder="User Name"
                 name="username"
                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                 {...register("username", {
@@ -90,7 +93,7 @@ const Registartion = () => {
             <div class="relative">
               <input
                 type="email"
-                placeholder="Your email address"
+                placeholder="Email Address"
                 name="email"
                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                 {...register("email", {
@@ -135,8 +138,8 @@ const Registartion = () => {
             </div>
             <div class="relative">
               <input
-                type="number"
-                placeholder="Your number"
+                type="text"
+                placeholder="Number as (01xxxxxxxxx) "
                 name="number"
                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                 {...register("number", {
@@ -157,7 +160,7 @@ const Registartion = () => {
             <div class="relative">
               <input
                 type="pickup"
-                placeholder="Your pickup"
+                placeholder="Your Stopage"
                 name="pickup"
                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                 {...register("pickup", {
@@ -177,16 +180,15 @@ const Registartion = () => {
             </div>
             <div className="mb-2">
               <select
+                {...register("route")}
                 name="route"
-                value={route}
-                onChange={(e) => setRoute(e.target.value)}
                 className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
               >
-                <option value="">Select Route</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+                <option value="">Select your route</option>
+                <option>Route 1</option>
+                <option>Route 2</option>
+                <option>Route 3</option>
+                <option>Route 4</option>
               </select>
             </div>
 
@@ -197,7 +199,7 @@ const Registartion = () => {
                 onChange={(e) => setRole(e.target.value)}
                 className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
               >
-                <option value="">Pic Your occupation</option>
+                <option value="">Register as a</option>
                 <option>Student</option>
                 <option>Faculty</option>
                 <option>Staff</option>
@@ -208,13 +210,13 @@ const Registartion = () => {
                 <div class="relative">
                   <input
                     type="id"
-                    placeholder="Your id"
+                    placeholder="Student ID"
                     name="id"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     {...register("id", {
                       required: {
                         value: true,
-                        message: "id is Required",
+                        message: "Student ID is Required",
                       },
                     })}
                   />
@@ -229,13 +231,13 @@ const Registartion = () => {
                 <div class="relative">
                   <input
                     type="batch"
-                    placeholder="Your batch"
+                    placeholder="Batch Number"
                     name="batch"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     {...register("batch", {
                       required: {
                         value: true,
-                        message: "batch is Required",
+                        message: "Batch Number is Required",
                       },
                     })}
                   />
@@ -250,13 +252,13 @@ const Registartion = () => {
                 <div class="relative">
                   <input
                     type="section"
-                    placeholder="Your section"
+                    placeholder="Section"
                     name="section"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     {...register("section", {
                       required: {
                         value: true,
-                        message: "section is Required",
+                        message: "Section is Required",
                       },
                     })}
                   />
@@ -274,13 +276,13 @@ const Registartion = () => {
                 <div class="relative">
                   <input
                     type="id"
-                    placeholder="Your id"
+                    placeholder="Organisational ID"
                     name="id"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     {...register("id", {
                       required: {
                         value: true,
-                        message: "id is Required",
+                        message: "Organisational ID is Required",
                       },
                     })}
                   />
@@ -295,13 +297,13 @@ const Registartion = () => {
                 <div class="relative">
                   <input
                     type="dept"
-                    placeholder="Your dept"
+                    placeholder="Department"
                     name="dept"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     {...register("dept", {
                       required: {
                         value: true,
-                        message: "dept is Required",
+                        message: "Department is Required",
                       },
                     })}
                   />
@@ -316,7 +318,7 @@ const Registartion = () => {
                 <div class="relative">
                   <input
                     type="codename"
-                    placeholder="Your codename"
+                    placeholder="Codename"
                     name="codename"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     {...register("codename", {
@@ -337,13 +339,13 @@ const Registartion = () => {
                 <div class="relative">
                   <input
                     type="designation"
-                    placeholder="Your designation"
+                    placeholder="Designation"
                     name="designation"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                     {...register("designation", {
                       required: {
                         value: true,
-                        message: "designation is Required",
+                        message: "Designation is Required",
                       },
                     })}
                   />
@@ -361,21 +363,21 @@ const Registartion = () => {
                 {" "}
                 <div class="relative">
                   <input
-                    type="id"
-                    placeholder="Your id"
-                    name="id"
+                    type="text"
+                    placeholder="Staff ID"
+                    name="staffId"
                     class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                    {...register("id", {
+                    {...register("staffId", {
                       required: {
                         value: true,
-                        message: "id is Required",
+                        message: "Staff ID is Required",
                       },
                     })}
                   />
                   <label className="label">
-                    {errors.id?.type === "required" && (
+                    {errors.staffId?.type === "required" && (
                       <span className="label-text-alt text-red-500">
-                        {errors.id.message}
+                        {errors.staffId.message}
                       </span>
                     )}
                   </label>
@@ -388,7 +390,7 @@ const Registartion = () => {
             <div class="relative">
               <input
                 type="password"
-                placeholder="Your password"
+                placeholder="Password"
                 name="password"
                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                 {...register("password", {
@@ -417,12 +419,44 @@ const Registartion = () => {
                 )}
               </label>
             </div>
+            <div class="relative">
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                {...register("confirmPassword", {
+                  required: {
+                    value: true,
+                    message: "Confirm Password is Required",
+                  },
+                  pattern: {
+                    value:
+                      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+                    message:
+                      "Minimum eight characters, at least one letter and one number",
+                  },
+                })}
+              />
+              <label className="label">
+                {errors.confirmPassword?.type === "required" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.confirmPassword.message}
+                  </span>
+                )}
+                {errors.confirmPassword?.type === "pattern" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.confirmPassword.message}
+                  </span>
+                )}
+              </label>
+            </div>
             <div class="flex items-center justify-between">
               <button
                 type="submit"
                 class="inline-block px-5 py-3 ml-3 text-sm font-medium text-white bg-blue-500 rounded-lg"
               >
-                register
+                Register
               </button>
               <p>
                 Already have an account?{" "}
