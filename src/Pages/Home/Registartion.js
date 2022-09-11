@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import loginForm from "../../Assets/Images/Home/LoginForm.jpg";
 
-const Login = () => {
+const Registartion = () => {
   return (
     <div>
       <section class="relative flex flex-wrap lg:h-screen lg:items-center">
@@ -15,6 +14,18 @@ const Login = () => {
         </div>
         <div class="w-full px-4 py-12 lg:w-1/2 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
           <div class="max-w-lg mx-auto text-center">
+            <select className="select w-full max-w-xs">
+              <option disabled selected>
+                Pick your favorite Simpson
+              </option>
+              <option>Homer</option>
+              <option>Marge</option>
+              <option>Bart</option>
+              <option>Lisa</option>
+              <option>Maggie</option>
+            </select>
+          </div>
+          {/* <div class="max-w-lg mx-auto text-center">
             <h1 class="text-2xl font-bold sm:text-3xl">Send an email</h1>
 
             <p class="mt-4 text-gray-500">
@@ -72,15 +83,14 @@ const Login = () => {
                 type="submit"
                 class="inline-block px-5 py-3 ml-3 text-sm font-medium text-white bg-blue-500 rounded-lg"
               >
-                Send
+                register
               </button>
-              <Link to="/register">Yet Not Registerd</Link>
             </div>
-          </form>
+          </form> */}
         </div>
       </section>
     </div>
   );
 };
 
-export default Login;
+export default Registartion;
