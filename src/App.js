@@ -12,6 +12,7 @@ import AddBusInventory from "./Pages/Dashboard/AddBusInventory";
 import UpdateProfile from "./Pages/Home/UpdateProfile";
 import StaffList from "./Pages/Dashboard/StaffList";
 import AddRoute from "./Pages/Dashboard/AddRoute";
+import Transports from "./Pages/Dashboard/Transports";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               element={<AddBusInventory></AddBusInventory>}
             ></Route>
             <Route path="route" element={<RouteList></RouteList>}></Route>
+            <Route path="transport" element={<Transports></Transports>}></Route>
             <Route path="stafflist" element={<StaffList></StaffList>}></Route>
             <Route path="addroute" element={<AddRoute></AddRoute>}></Route>
           </Route>
