@@ -8,6 +8,7 @@ import BusInventory from "./Pages/Dashboard/BusInventory";
 import AuthProvider from "./Context/AuthProvider";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import RouteList from "./Pages/Dashboard/RouteList";
+import AddBusInventory from "./Pages/Dashboard/AddBusInventory";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/businventory" element={<BusInventory />} />
           <Route path="/dashboard" element={<Dashboard />}>
             <Route index element={<BusInventory></BusInventory>}></Route>
+            <Route path='addbus' element={<AddBusInventory></AddBusInventory>}></Route>
             <Route path='route' element={<RouteList></RouteList>}></Route>
           </Route>
         </Routes>
