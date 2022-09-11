@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import loginForm from "../../Assets/Images/Home/LoginForm.jpg";
 
 const Registartion = () => {
+  const [role, setRole] = useState("");
+  const [route, setRoute] = useState("");
   const {
     register,
     formState: { errors },
@@ -11,18 +13,38 @@ const Registartion = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data.email, data.fullname, data.username, data.number, data.occupation, data.pickup, data.route, data.id, data.batch, data.section, data.batch, data.dept, data.codename, data.designation)
-  }
+    console.log(
+      data.email,
+      data.fullname,
+      data.username,
+      data.number,
+      data.occupation,
+      data.pickup,
+      data.route,
+      data.id,
+      data.batch,
+      data.section,
+      data.batch,
+      data.dept,
+      data.codename,
+      data.designation
+    );
+  };
   return (
     <div>
       <section class="relative flex flex-wrap lg:h-screen lg:items-center">
         <div class="w-full px-4 py-12 lg:w-1/2 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
           <div class="max-w-lg mx-auto text-center">
             <div class="max-w-lg mx-auto text-center">
-              <h1 class="text-2xl font-bold sm:text-3xl">Register New Account</h1>
+              <h1 class="text-2xl font-bold sm:text-3xl">
+                Register New Account
+              </h1>
             </div>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} class="max-w-md mx-auto mt-8 mb-0 space-y-4">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            class="max-w-md mx-auto mt-8 mb-0 space-y-4"
+          >
             <div class="relative">
               <input
                 type="fullname"
@@ -33,7 +55,7 @@ const Registartion = () => {
                   required: {
                     value: true,
                     message: "fullname is Required",
-                  }
+                  },
                 })}
               />
               <label className="label">
@@ -54,7 +76,7 @@ const Registartion = () => {
                   required: {
                     value: true,
                     message: "username is Required",
-                  }
+                  },
                 })}
               />
               <label className="label">
@@ -121,7 +143,7 @@ const Registartion = () => {
                   required: {
                     value: true,
                     message: "number is Required",
-                  }
+                  },
                 })}
               />
               <label className="label">
@@ -131,14 +153,6 @@ const Registartion = () => {
                   </span>
                 )}
               </label>
-            </div>
-            <div className='mb-2'>
-              <select {...register("occupation")} name="occupation" className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm">
-                <option disabled selected>Pick a occupation</option>
-                <option>Student</option>
-                <option>Faculty</option>
-                <option>Staff</option>
-              </select>
             </div>
             <div class="relative">
               <input
@@ -150,7 +164,7 @@ const Registartion = () => {
                   required: {
                     value: true,
                     message: "pickup is Required",
-                  }
+                  },
                 })}
               />
               <label className="label">
@@ -161,153 +175,216 @@ const Registartion = () => {
                 )}
               </label>
             </div>
-            <div class="relative">
-              <input
-                type="route"
-                placeholder="Your route"
+            <div className="mb-2">
+              <select
                 name="route"
-                class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                {...register("route", {
-                  required: {
-                    value: true,
-                    message: "route is Required",
-                  }
-                })}
-              />
-              <label className="label">
-                {errors.route?.type === "required" && (
-                  <span className="label-text-alt text-red-500">
-                    {errors.route.message}
-                  </span>
-                )}
-              </label>
+                value={route}
+                onChange={(e) => setRoute(e.target.value)}
+                className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
+              >
+                <option value="">Select Route</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
             </div>
-            <div class="relative">
-              <input
-                type="id"
-                placeholder="Your id"
-                name="id"
-                class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                {...register("id", {
-                  required: {
-                    value: true,
-                    message: "id is Required",
-                  }
-                })}
-              />
-              <label className="label">
-                {errors.id?.type === "required" && (
-                  <span className="label-text-alt text-red-500">
-                    {errors.id.message}
-                  </span>
-                )}
-              </label>
+
+            <div className="mb-2">
+              <select
+                name="occupation"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="select w-full p-4 pr-12 text-xs border-gray-200 rounded-lg shadow-sm"
+              >
+                <option value="">Pic Your occupation</option>
+                <option>Student</option>
+                <option>Faculty</option>
+                <option>Staff</option>
+              </select>
             </div>
-            <div class="relative">
-              <input
-                type="batch"
-                placeholder="Your batch"
-                name="batch"
-                class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                {...register("batch", {
-                  required: {
-                    value: true,
-                    message: "batch is Required",
-                  }
-                })}
-              />
-              <label className="label">
-                {errors.batch?.type === "required" && (
-                  <span className="label-text-alt text-red-500">
-                    {errors.batch.message}
-                  </span>
-                )}
-              </label>
-            </div>
-            <div class="relative">
-              <input
-                type="section"
-                placeholder="Your section"
-                name="section"
-                class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                {...register("section", {
-                  required: {
-                    value: true,
-                    message: "section is Required",
-                  }
-                })}
-              />
-              <label className="label">
-                {errors.section?.type === "required" && (
-                  <span className="label-text-alt text-red-500">
-                    {errors.section.message}
-                  </span>
-                )}
-              </label>
-            </div>
-            <div class="relative">
-              <input
-                type="dept"
-                placeholder="Your dept"
-                name="dept"
-                class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                {...register("dept", {
-                  required: {
-                    value: true,
-                    message: "dept is Required",
-                  }
-                })}
-              />
-              <label className="label">
-                {errors.dept?.type === "required" && (
-                  <span className="label-text-alt text-red-500">
-                    {errors.dept.message}
-                  </span>
-                )}
-              </label>
-            </div>
-            <div class="relative">
-              <input
-                type="codename"
-                placeholder="Your codename"
-                name="codename"
-                class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                {...register("codename", {
-                  required: {
-                    value: true,
-                    message: "codename is Required",
-                  }
-                })}
-              />
-              <label className="label">
-                {errors.codename?.type === "required" && (
-                  <span className="label-text-alt text-red-500">
-                    {errors.codename.message}
-                  </span>
-                )}
-              </label>
-            </div>
-            <div class="relative">
-              <input
-                type="designation"
-                placeholder="Your designation"
-                name="designation"
-                class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                {...register("designation", {
-                  required: {
-                    value: true,
-                    message: "designation is Required",
-                  }
-                })}
-              />
-              <label className="label">
-                {errors.designation?.type === "required" && (
-                  <span className="label-text-alt text-red-500">
-                    {errors.designation.message}
-                  </span>
-                )}
-              </label>
-            </div>
+            {role === "Student" ? (
+              <div>
+                <div class="relative">
+                  <input
+                    type="id"
+                    placeholder="Your id"
+                    name="id"
+                    class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                    {...register("id", {
+                      required: {
+                        value: true,
+                        message: "id is Required",
+                      },
+                    })}
+                  />
+                  <label className="label">
+                    {errors.id?.type === "required" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.id.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
+                <div class="relative">
+                  <input
+                    type="batch"
+                    placeholder="Your batch"
+                    name="batch"
+                    class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                    {...register("batch", {
+                      required: {
+                        value: true,
+                        message: "batch is Required",
+                      },
+                    })}
+                  />
+                  <label className="label">
+                    {errors.batch?.type === "required" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.batch.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
+                <div class="relative">
+                  <input
+                    type="section"
+                    placeholder="Your section"
+                    name="section"
+                    class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                    {...register("section", {
+                      required: {
+                        value: true,
+                        message: "section is Required",
+                      },
+                    })}
+                  />
+                  <label className="label">
+                    {errors.section?.type === "required" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.section.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
+              </div>
+            ) : role === "Faculty" ? (
+              <div>
+                <div class="relative">
+                  <input
+                    type="id"
+                    placeholder="Your id"
+                    name="id"
+                    class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                    {...register("id", {
+                      required: {
+                        value: true,
+                        message: "id is Required",
+                      },
+                    })}
+                  />
+                  <label className="label">
+                    {errors.id?.type === "required" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.id.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
+                <div class="relative">
+                  <input
+                    type="dept"
+                    placeholder="Your dept"
+                    name="dept"
+                    class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                    {...register("dept", {
+                      required: {
+                        value: true,
+                        message: "dept is Required",
+                      },
+                    })}
+                  />
+                  <label className="label">
+                    {errors.dept?.type === "required" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.dept.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
+                <div class="relative">
+                  <input
+                    type="codename"
+                    placeholder="Your codename"
+                    name="codename"
+                    class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                    {...register("codename", {
+                      required: {
+                        value: true,
+                        message: "codename is Required",
+                      },
+                    })}
+                  />
+                  <label className="label">
+                    {errors.codename?.type === "required" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.codename.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
+                <div class="relative">
+                  <input
+                    type="designation"
+                    placeholder="Your designation"
+                    name="designation"
+                    class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                    {...register("designation", {
+                      required: {
+                        value: true,
+                        message: "designation is Required",
+                      },
+                    })}
+                  />
+                  <label className="label">
+                    {errors.designation?.type === "required" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.designation.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
+              </div>
+            ) : role === "Staff" ? (
+              <div>
+                {" "}
+                <div class="relative">
+                  <input
+                    type="id"
+                    placeholder="Your id"
+                    name="id"
+                    class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+                    {...register("id", {
+                      required: {
+                        value: true,
+                        message: "id is Required",
+                      },
+                    })}
+                  />
+                  <label className="label">
+                    {errors.id?.type === "required" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.id.message}
+                      </span>
+                    )}
+                  </label>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+
             <div class="relative">
               <input
                 type="password"
@@ -347,7 +424,12 @@ const Registartion = () => {
               >
                 register
               </button>
-              <p>Already have an account? <Link to="/" className="text-blue-800">Login</Link></p>
+              <p>
+                Already have an account?{" "}
+                <Link to="/" className="text-blue-800">
+                  Login
+                </Link>
+              </p>
             </div>
           </form>
         </div>
