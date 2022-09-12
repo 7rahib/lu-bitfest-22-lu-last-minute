@@ -1,8 +1,13 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const RouteListRow = ({ route, refetch }) => {
+  const navigate = useNavigate();
   const { _id, routeNumber } = route;
-  const updateRoute = (routeNumber) => {};
+  // const updateRoute = (routeNumber) => {
+  //   console.log(routeNumber);
+  //   navigate("/updateRoute", { state: { routeNumber: routeNumber } });
+  // };
   const deleteRoute = (routeNumber) => {
     fetch(`http://localhost:5000/route/${routeNumber}`, {
       method: "DELETE",
@@ -19,9 +24,13 @@ const RouteListRow = ({ route, refetch }) => {
       <td>{route?.routeNumber}</td>
       <td>{route?.location?.label}</td>
       <td>
-        <button onClick={updateRoute} className="btn btn-xs btn-success">
+        <Link
+          to="/updateRoute"
+          // onClick={() => updateRoute(routeNumber)}
+          className="btn btn-xs btn-success"
+        >
           Update
-        </button>
+        </Link>
       </td>
       <td>
         <button
