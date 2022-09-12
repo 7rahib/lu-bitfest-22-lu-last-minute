@@ -14,6 +14,7 @@ import UpdateProfile from "./Pages/Home/UpdateProfile";
 import StaffList from "./Pages/Dashboard/StaffList";
 import AddRoute from "./Pages/Dashboard/AddRoute";
 import Transports from "./Pages/Dashboard/Transports";
+import TransportDemand from "./Pages/Dashboard/TransportDemand";
 
 function App() {
   return (
@@ -35,6 +36,10 @@ function App() {
             <Route path="transport" element={<Transports></Transports>}></Route>
             <Route path="stafflist" element={<StaffList></StaffList>}></Route>
             <Route path="addroute" element={<AddRoute></AddRoute>}></Route>
+            <Route
+              path="transportDemand"
+              element={<TransportDemand></TransportDemand>}
+            ></Route>
           </Route>
         </Routes>
         <Footer></Footer>

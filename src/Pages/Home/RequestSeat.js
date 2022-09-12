@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { TimePicker } from "antd";
-
 import moment from "moment";
 
 const RequestSeat = () => {
-  const [time, setTime] = useState();
-  const onChange = (time, timeString) => {
-    // console.log(time._d, timeString);
-    const x = new Date(time?._d);
-    console.log(Math.floor(x));
-  };
+  //   const [time, setTime] = useState();
+  //   const onChange = (time, timeString) => {
+  //     console.log(time._d, timeString);
+  //     const x = new Date(time?._d);
+  //     console.log(Math.floor(x));
+  //   };
 
   const {
     register,
@@ -69,12 +68,12 @@ const RequestSeat = () => {
           </div>
         </form>
       </div>
-      <div>
+      {/* <div>
         <TimePicker
           onChange={onChange}
           defaultOpenValue={moment("00:00:00", "HH:mm:ss")}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
