@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import loginForm from "../../Assets/Images/Home/LoginForm.jpg";
 import UseAuth from "../../Context/UseAuth";
+import leading from "../../Assets/Images/Home/leading.jpg";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,12 +30,12 @@ const Login = () => {
   const onSubmit = (data) => {
     fetch(`http://localhost:5000/users/${data.username}/info`)
       .then((res) => res.json())
-      .then((data) => {
+      .then((fetchData) => {
         setEmail(data.email);
-        setUserData(data);
+        setUserData(fetchData);
+        emailPassLogIn(fetchData.email, data.password);
       });
     localStorage.setItem("username", data.username);
-    emailPassLogIn(email, data.password);
   };
 
   const updateProfile = () => {
@@ -48,7 +48,7 @@ const Login = () => {
         <div class="relative w-full h-64 sm:h-96 lg:w-1/2 lg:h-full">
           <img
             class="absolute inset-0 object-cover w-full h-full"
-            src={loginForm}
+            src={leading}
             alt=""
           />
         </div>
